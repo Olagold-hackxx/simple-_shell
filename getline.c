@@ -1,16 +1,16 @@
 #include "shell.h"
 
 /**
- *
- *
+ * _getline - get line from stdin in interactive mode
+ * Return: read size
  */
 
-size_t _getline(char *argv[])
+size_t _getline(char **argv)
 {
 	char *buf = NULL;
 	size_t buf_size = 0;
 	ssize_t read_size, i;
-	char *copied, *arg[20], *delim = " ";
+	char *copied, *arg[100], *delim = " ";
 	int token;
 
 	read_size = getline(&buf, &buf_size, stdin);
@@ -38,4 +38,43 @@ size_t _getline(char *argv[])
 	exec_exe(arg[0], arg, NULL);
 
 	return (read_size);
+}
+
+/**
+ * readline - read from terminal in non interactive mode
+ *
+ */
+
+size_t readline(char **argv)
+{
+	int token, i;
+	size_t count = 100;
+	char *buf, *arg[50], *copied, *delim = " ";
+	ssize_t read_size;
+
+	buf = malloc(sizeof(char) * count);
+	if (!buf)	       
+		exit(EXIT_FAILURE);
+	read_size = read(STDIN_FILENO, buf, count);
+	if (read_size < 0)
+		perror(argv[0]);
+	copied = malloc(sizeof(char) * read_size);
+        if (copied == NULL)
+                exit(EXIT_FAILURE);
+	/* a loop to copy input from read */
+        for(i = 0; i < read_size-1; i++)
+        {
+                copied[i] = buf[i];
+        }
+	arg[0] = strtok(copied, delim);
+        token = 0;
+        while (arg[token])
+        {
+                token++;
+                arg[token] = strtok(NULL, delim);
+        }
+        arg[token+1] = NULL;
+
+        exec_exe(arg[0], arg, NULL);
+        return (read_size);
 }
