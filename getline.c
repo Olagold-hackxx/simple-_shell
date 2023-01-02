@@ -2,6 +2,7 @@
 
 /**
  * _getline - get line from stdin in interactive mode
+ * @argv: ptr to ptr holding progam name
  * Return: read size
  */
 
@@ -13,6 +14,7 @@ size_t _getline(char **argv)
 	char *copied, *arg[100], *delim = " ";
 	int token;
 
+    /*read user input from stdin */
 	read_size = getline(&buf, &buf_size, stdin);
 	if (read_size < 0)
 		perror(argv[0]);
@@ -22,10 +24,11 @@ size_t _getline(char **argv)
 		exit(EXIT_FAILURE);
 
 	/* a loop to copy input from getline */
-	for(i = 0; i < read_size-1; i++)
+	for (i = 0; i < read_size - 1; i++)
 	{
 		copied[i] = buf[i];
 	}
+	/*tokenize string*/
 	arg[0] = strtok(copied, delim);
 	token = 0;
 	while (arg[token])
@@ -33,7 +36,8 @@ size_t _getline(char **argv)
 		token++;
 		arg[token] = strtok(NULL, delim);
 	}
-	arg[token+1] = NULL;
+	/*append NULL to arg incase of no args to cmd*/
+	arg[token + 1] = NULL;
 
 	exec_exe(arg[0], arg, NULL);
 
@@ -42,7 +46,8 @@ size_t _getline(char **argv)
 
 /**
  * readline - read from terminal in non interactive mode
- *
+ * @argv: ptr to ptr holding progam name
+ * Return: read size
  */
 
 size_t readline(char **argv)
@@ -53,28 +58,28 @@ size_t readline(char **argv)
 	ssize_t read_size;
 
 	buf = malloc(sizeof(char) * count);
-	if (!buf)	       
+	if (!buf)
 		exit(EXIT_FAILURE);
 	read_size = read(STDIN_FILENO, buf, count);
 	if (read_size < 0)
 		perror(argv[0]);
 	copied = malloc(sizeof(char) * read_size);
-        if (copied == NULL)
-                exit(EXIT_FAILURE);
+	if (copied == NULL)
+		exit(EXIT_FAILURE);
 	/* a loop to copy input from read */
-        for(i = 0; i < read_size-1; i++)
-        {
-                copied[i] = buf[i];
-        }
+	for (i = 0; i < read_size - 1; i++)
+	{
+		copied[i] = buf[i];
+	}
 	arg[0] = strtok(copied, delim);
-        token = 0;
-        while (arg[token])
-        {
-                token++;
-                arg[token] = strtok(NULL, delim);
-        }
-        arg[token+1] = NULL;
+	token = 0;
+	while (arg[token])
+	{
+		token++;
+		arg[token] = strtok(NULL, delim);
+	}
+	arg[token + 1] = NULL;
 
-        exec_exe(arg[0], arg, NULL);
-        return (read_size);
+	exec_exe(arg[0], arg, NULL);
+	return (read_size);
 }

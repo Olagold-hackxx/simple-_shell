@@ -1,8 +1,10 @@
 #include "shell.h"
 
 /**
- *
- *
+ * main - main function
+ * @argc: unused attribute
+ * @argv: ptr to ptr to cmd line args
+ * Return: 0 on success
  */
 int main(int argc __attribute__((unused)), char **argv)
 {

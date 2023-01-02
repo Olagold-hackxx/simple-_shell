@@ -1,8 +1,11 @@
 #include "shell.h"
 
 /**
- *
- *
+ * exec_exe - execute externals(executable)
+ * @path: Path to exec
+ * @arg: cmd args
+ * @envp: environ variables
+ * Return: 0 on success
  */
 
 int exec_exe(char *path, char **arg, char **envp)
