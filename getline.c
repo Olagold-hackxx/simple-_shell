@@ -8,48 +8,44 @@
 
 size_t _getline(char **argv)
 {
-	char *buf;
+	char *buf = NULL, *path;
 	size_t buf_size = 100;
-	ssize_t read_size, i;
-	char *copied, *arg[100], *delim = " ";
+	ssize_t read_size;
+	char *copied, **arg, *delim = " ", **envp = NULL;
 	int token;
 
-	buf = malloc(sizeof(char) * buf_size);
-	if (buf == NULL)
-	{
-		free(buf);
-		exit(EXIT_FAILURE);
-	}
-
-    /*read user input from stdin */
+        /*read user input from stdin */
 	read_size = getline(&buf, &buf_size, stdin);
 	if (read_size < 0)
 		perror(argv[0]);
-	
+
+	arg = _malloc(20);
+	arg[0] = malloc(sizeof(char) * 10);
+	//init_mem(arg, 20);
 	copied = malloc(sizeof(char) * read_size);
 	if (copied == NULL)
 	{
 		free(copied);
 		exit(EXIT_FAILURE);
 	}
-	/* a loop to copy input from getline */
-	for (i = 0; i < read_size - 1; i++)
-	{
-		copied[i] = buf[i];
-	}
-	
-	/*tokenize string*/
+
+	init_mem(copied, read_size);
+	/*copy input from get4line */
+	strncat(copied, buf, read_size - 1);
 	arg[0] = strtok(copied, delim);
+	//*arg[0] = *arg[0] + '\0';
 	token = 0;
 	while (arg[token])
 	{
 		token++;
 		arg[token] = strtok(NULL, delim);
 	}
-
+	path = malloc(sizeof(char) * 10);
+	init_mem(path, 10);
+	path = strdup(arg[0]);
 	/*append NULL to arg incase no args passed to cmd*/
 
-	exec_exe(arg[0], arg, NULL);
+	exec_exe(path, arg, envp);
 	free(buf);
 	free(copied);
 	return (read_size);
