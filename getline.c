@@ -11,43 +11,43 @@ size_t _getline(char **argv)
 	char *buf = NULL, *path;
 	size_t buf_size = 100;
 	ssize_t read_size;
-	char *copied, **arg, *delim = " ", **envp = NULL;
-	int token;
+	char *copied, **arg, *token, *delim = " ", **envp = NULL;
+	int len, i;
 
         /*read user input from stdin */
 	read_size = getline(&buf, &buf_size, stdin);
 	if (read_size < 0)
 		perror(argv[0]);
 
-	arg = _malloc(20);
-	arg[0] = malloc(sizeof(char) * 10);
-	//init_mem(arg, 20);
-	copied = malloc(sizeof(char) * read_size);
-	if (copied == NULL)
+	arg = ptr_malloc(20);
+
+	copied = chr_malloc(read_size);
+	path = chr_malloc(read_size);
+
+	if (path == NULL)
 	{
-		free(copied);
+		free(path);
 		exit(EXIT_FAILURE);
 	}
-
+	init_mem(path, read_size);
 	init_mem(copied, read_size);
-	/*copy input from get4line */
-	strncat(copied, buf, read_size - 1);
-	arg[0] = strtok(copied, delim);
-	//*arg[0] = *arg[0] + '\0';
-	token = 0;
-	while (arg[token])
+	/*copy input from getline */
+	_strncat(copied, buf, read_size - 1);
+	copied[read_size - 1] = '\0';
+	copied = strformat(copied, read_size);
+	token = strtok(copied, delim);
+	i = 0;
+	arg[0] = token;
+	while (arg[i])
 	{
-		token++;
-		arg[token] = strtok(NULL, delim);
+		i++;
+		arg[i] = strtok(NULL, delim);
 	}
-	path = malloc(sizeof(char) * 10);
-	init_mem(path, 10);
-	path = strdup(arg[0]);
-	/*append NULL to arg incase no args passed to cmd*/
-
+	//_strcat(path, token);
 	exec_exe(path, arg, envp);
-	free(buf);
-	free(copied);
+	//free(buf);
+	//free(copied);
+	//free(path);
 	return (read_size);
 }
 
@@ -93,8 +93,6 @@ size_t readline(char **argv)
 		token++;
 		arg[token] = strtok(NULL, delim);
 	}
-	
-	arg[token] = NULL;
 	
 	exec_exe(arg[0], arg, NULL);
 	free(buf);

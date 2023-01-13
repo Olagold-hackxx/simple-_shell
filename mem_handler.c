@@ -19,7 +19,7 @@ char *init_mem(char *arg, size_t mem_len)
  *
  */
 
-char **_malloc(size_t mem_len)
+char **ptr_malloc(size_t mem_len)
 {
 	char **mem;
 
@@ -30,3 +30,21 @@ char **_malloc(size_t mem_len)
 	}
 	return (mem);
 }
+
+/**
+ * 
+ * 
+ */
+
+char *chr_malloc(size_t mem_len)
+{
+	char *mem;
+
+	mem = malloc(sizeof(char) * mem_len);
+	if (mem == NULL)
+	{
+		exit(EXIT_FAILURE);
+	}
+	return (mem);
+}
+
