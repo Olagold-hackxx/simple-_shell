@@ -43,6 +43,7 @@ size_t _getline(char **argv)
 		i++;
 		arg[i] = strtok(NULL, delim);
 	}
+	strcpy(path, arg[0]);
 	//_strcat(path, token);
 	exec_exe(path, arg, envp);
 	//free(buf);

@@ -34,18 +34,22 @@ char *_strncat(char *dest, char *src, size_t n)
  */
 char *strformat(char *str, size_t str_size)
 {
-    int i =0;
+    int i =0, j = 0;
     char *formattedStr;
 
     formattedStr = chr_malloc(str_size);
+    init_mem(formattedStr, str_size);
 
-    while (str)
+    while (str[i] != '\0')
     {
-        if (str[i] != '\t' && (str[i] != ' ' && str[i + 1] != ' ') && str[i] != '\n' && str[i] != '\0')
-            formattedStr[i] = str[i];
+        if (str[i] != '\t' && str[i] != '\n')
+        {
+            formattedStr[j] = str[i];
+            j++;
+        }
         i++;
     }
-    formattedStr[i] = '\0';
-    //free(str);
+    formattedStr[j] = '\0';
+    free(str);
     return (formattedStr);
 }
