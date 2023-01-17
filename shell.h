@@ -25,6 +25,9 @@ int _strncmp(char *s1, char *s2, size_t n);
 int _strcmp(char *s1, char *s2);
 char *_strncpy(char *dest, const char *src, size_t n);
 size_t _strlen(char *s);
-char *strformat(char *str,size_t str_size);
+char *strformat(char *str, size_t str_size);
+size_t strtok_len(char *buf, char *token, int token_num);
+void execute(char *buf);
 
-#endif  /* SHELL_H */
+
+#endif /* SHELL_H */
