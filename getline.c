@@ -56,7 +56,6 @@ size_t readline(char **argv)
 	_strncat(copied, buf, read_size - 1);
 	copied[read_size - 1] = '\0';
 	free(buf);
-
 	copied = strformat(copied, read_size);
 	execute(copied);
 	return (read_size);
