@@ -10,7 +10,7 @@
  */
 char *_strncat(char *dest, char *src, size_t n)
 {
-	int src_i = 0, dest_i = 0;
+	size_t src_i = 0, dest_i = 0;
 
 	for (; dest[dest_i] != '\0';)
 		dest_i++;
@@ -62,9 +62,9 @@ char *strformat(char *str, size_t str_size)
  * @token_num: token num
  * Return: size of token
  */
-size_t strtok_len(char *buf, char *token, int token_num)
+size_t strtok_len(char *buf, int token_num)
 {
-    size_t i = 0, Numtokens = 0, token_len = 0;
+   int i = 0, Numtokens = 0, token_len = 0;
 
     while (buf[i] != '\0')
     {

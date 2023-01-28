@@ -39,9 +39,8 @@ size_t _getline(char **argv)
 
 size_t readline(char **argv)
 {
-	int token, i;
 	size_t count = 100;
-	char *buf, *arg[50], *copied, *delim = " ";
+	char *buf, *copied;
 	ssize_t read_size;
 
 	/*alloc memory for buf*/

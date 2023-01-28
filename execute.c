@@ -44,7 +44,7 @@ void execute(char *buf)
 	i = 0;
 	arg[0] = token;
 	/* get len of first token which is also the path*/
-	path_len = strtok_len(buf, arg[0], i);
+	path_len = strtok_len(buf, i);
 	path = chr_malloc(path_len + 1);
 	init_mem(path, path_len);
 
