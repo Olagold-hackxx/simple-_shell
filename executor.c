@@ -89,13 +89,18 @@ int exec_external(char *const *argv)
 				case 0: /* returned to child */
 					execve(path[i], argv, environ); /* execute cmd */
 					err_msg = 1; /* errno has been set */
-					status = 2;
 					exit(EXIT_FAILURE); /* exits child, not parent ???? */
 				default: /* returned to parent */
 					if ((waitpid(pid, &status, 0)) == -1)
+					{
+						exit_status = WEXITSTATUS(status);
 						return (-1); /* wait failure */
+					}
 					else
+					{
+						exit_status = WEXITSTATUS(status);
 						return (0); /* success */
+					}
 			}
 		}
 

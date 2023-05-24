@@ -47,7 +47,7 @@ extern mem_list *mem_head; /* freed each session iteration */
 extern mem_list *static_mem_head; /* freed on exit of shell session */
 extern char **environ;
 extern size_t err_msg;
-extern int status;
+extern int exit_status;
 
 /* MAIN FUNCTIONS */
 char **_strtok(char *line);

@@ -17,8 +17,8 @@ int builtin_exit(char *const *argv)
 	{
 		free_mem_list(&mem_head);
 		free_static_mem_list(&static_mem_head);
-		if (status < 2)
-			exit(2);
+		if (exit_status > 0)
+			exit(exit_status);
 		exit(EXIT_SUCCESS);
 	}
 	else

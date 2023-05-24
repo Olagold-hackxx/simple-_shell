@@ -2,7 +2,7 @@
 size_t err_msg;
 mem_list *static_mem_head;
 mem_list *mem_head;
-int status = 0;
+int exit_status = 0;
 
 void recieve_sig(int signal);
 
