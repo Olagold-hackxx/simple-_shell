@@ -37,7 +37,7 @@ int main(int argc __attribute__((unused)),  char **argv)
 			free_static_mem_list(&static_mem_head);
 			if (isatty(STDIN_FILENO))
 				write(STDOUT_FILENO, "\n", 1);
-			exit(EXIT_SUCCESS);
+			exit(exit_status);
 		}
 
 		/* set pointer array to parsed command line */

@@ -22,6 +22,7 @@ void print_err(size_t loop_cnt, char *argv, char **tok_array)
 		case (2):
 			err_cus = alloc_mngr(err_cus, (sizeof(char) * 12));
 			err_cus = ": not found\0";
+			exit_status = 127;
 			break;
 		case (3):
 			err_cus = case_three(err_cus, tok_array);
