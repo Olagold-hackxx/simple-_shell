@@ -1,4 +1,8 @@
 #include "shell.h"
+size_t err_msg;
+mem_list *static_mem_head;
+mem_list *mem_head;
+int status = 0;
 
 void recieve_sig(int signal);
 
@@ -7,7 +11,7 @@ void recieve_sig(int signal);
  * @argc: Counts how many elements are within the argv array
  * @argv: An array of arguments recieved through the command line
  *
- * Return: 0 or EXIT_SUCCESS on Sucess, EXIT_FAILURE on Failure
+ * Return: 0 or EXIT_SUCCESS on Success, EXIT_FAILURE on Failure
  */
 int main(int argc __attribute__((unused)),  char **argv)
 {

@@ -44,12 +44,10 @@ typedef struct built_ins
 
 /* EXTERN VARIABLES */
 extern mem_list *mem_head; /* freed each session iteration */
-mem_list *mem_head;
 extern mem_list *static_mem_head; /* freed on exit of shell session */
-mem_list *static_mem_head;
 extern char **environ;
 extern size_t err_msg;
-size_t err_msg;
+extern int status;
 
 /* MAIN FUNCTIONS */
 char **_strtok(char *line);
