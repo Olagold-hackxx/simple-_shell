@@ -1,175 +1,92 @@
-**SIMPLE SHELL (HSH)**
+# Simple Shell
 
-A project to create a simple shell that works exactly like bash shell (/bin/sh)
+## Introduction
+This is a simple shell program modeled after the likes of early Unix shells such as the Thompson, Korn or C shells. It was written by Michelle Giraldo and Justin Majetich for a project via Holberton School. The shell provides an interface by which a user may interact with the kernel, as well as a number of built-in tools to ease this interaction. Running in interactive mode, the program solicits a command line from the user via the terminal, parses this input for valid commands, and executes them accordingly. Users may also pipe output from other commands into the shell, causing it to run in non-interactive mode. In this mode, the shell will not prompt the user for input and will automatically exit upon completion of the commands received. For further information regarding functionality and support, refer to the included man page.
 
+## Installation
+To install our shell on your Linux machine, clone the contents of this repository into a fresh directory and compile with the following command:
 
+    gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 
-**Resources**
-**Read or watch**:
-* [Unix shell](https://alx-intranet.hbtn.io/rltoken/f0YU9TAhniMXWlSXtb64Yw)
-* [Thompson shell](https://alx-intranet.hbtn.io/rltoken/7LJOp2qP7qHUcsOK2-F3qA)
-* [Ken Thompson](https://alx-intranet.hbtn.io/rltoken/wTSu31ZP1f7fFTJFgRQC7w)
-* Everything you need to know to start coding your own shell concept page
+## Usage
+#### Interactive Mode
 
-**man or help:**
-
-* **sh** (Run **sh** as well)
-
-**Learning Objectives**  
-At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
-
-**General**
-* Who designed and implemented the original Unix operating system
-* Who wrote the first version of the UNIX shell
-* Who invented the B programming language (the direct predecessor to the C programming language)
-* Who is Ken Thompson
-* How does a shell work
-* What is a pid and a ppid
-* How to manipulate the environment of the current process
-* What is the difference between a function and a system call
-* How to create processes
-* What are the three prototypes of main
-* How does the shell use the PATH to find the programs
-* How to execute another program with the execve system call
-* How to suspend the execution of a process until one of its children terminates
-* What is EOF / “end-of-file”?
-
-**Copyright - Plagiarism**
-* You are tasked to come up with solutions for the tasks below yourself to meet with the above learning objectives.
-* You will not be able to meet the objectives of this or any following project by copying and pasting someone else’s work.
-* You are not allowed to publish any content of this project.
-* Any form of plagiarism is strictly forbidden and will result in removal from the program.
-
-**Requirements**  
-
-**General**
-* Allowed editors: vi, vim, emacs
-* All your files will be compiled on Ubuntu 20.04 LTS using gcc, using the options -Wall -Werror -Wextra -pedantic -std=gnu89
-* All your files should end with a new line
-* A README.md file, at the root of the folder of the project is mandatory
-* Your code should use the Betty style. It will be checked using [betty-style.pl](https://github.com/holbertonschool/Betty/blob/master/betty-style.pl) and [betty-doc.pl](https://github.com/holbertonschool/Betty/blob/master/betty-doc.pl)
-* Your shell should not have any memory leaks
-* No more than 5 functions per file
-* All your header files should be include guarded
-* Use system calls only when you need to (why?)
-* Write a README with the description of your project
-* You should have an AUTHORS file at the root of your repository, listing all individuals having contributed content to the repository. Format, see [Docker](https://alx-intranet.hbtn.io/rltoken/UL8J3kgl7HBK_Z9iBL3JFg)
-
-**GitHub**
-* There should be one project repository per group. If you and your partner have a repository with the same name in both your accounts, you risk a 0% score. Add your partner as a collaborator. *
-
-**More Info**
-**Output**
-* Unless specified otherwise, your program must have the exact same output as sh (/bin/sh) as well as the exact same error output.
-* The only difference is when you print an error, the name of the program must be equivalent to your argv[0] (See below)
-
-Example of error with sh:
-
-    $ echo "qwerty" | /bin/sh
-    /bin/sh: 1: qwerty: not found
-    $ echo "qwerty" | /bin/../bin/sh
-    /bin/../bin/sh: 1: qwerty: not found
-    $
-Same error with your program hsh:
-
-    $ echo "qwerty" | ./hsh
-    ./hsh: 1: qwerty: not found
-    $ echo "qwerty" | ./././hsh
-    ./././hsh: 1: qwerty: not found
-    $
-
-**List of allowed functions and system calls**
-* access (man 2 access)
-* chdir (man 2 chdir)
-* close (man 2 close)
-* closedir (man 3 closedir)
-* execve (man 2 execve)
-* exit (man 3 exit)
-* _exit (man 2 _exit)
-* fflush (man 3 fflush)
-* fork (man 2 fork)
-* free (man 3 free)
-* getcwd (man 3 getcwd)
-* getline (man 3 getline)
-* getpid (man 2 getpid)
-* isatty (man 3 isatty)
-* kill (man 2 kill)
-* malloc (man 3 malloc)
-* open (man 2 open)
-* opendir (man 3 opendir)
-* perror (man 3 perror)
-* read (man 2 read)
-* readdir (man 3 readdir)
-* signal (man 2 signal)
-* stat (__xstat) (man 2 stat)
-* lstat (__lxstat) (man 2 lstat)
-* fstat (__fxstat) (man 2 fstat)
-* strtok (man 3 strtok)
-* wait (man 2 wait)
-* waitpid (man 2 waitpid)
-* wait3 (man 2 wait3)
-* wait4 (man 2 wait4)
-* write (man 2 write)
-
-**Compilation**   
-Your shell will be compiled this way:
-
-gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh   
-
-**Testing**      
-Your shell should work like this in interactive mode:
-
-    $ ./hsh  
-      ($) /bin/ls       
-    hsh main.c shell.c  
-      ($)  
-      ($) exit   
-    $
-
-But also in non-interactive mode:
-
-    $ echo "/bin/ls" | ./hsh  
-    hsh main.c shell.c test_ls_2  
+    user$ ./hsh
+    $ ls
+    a.out file0 file1 test.txt
     $ 
-    $ cat test_ls_2  
-    /bin/ls  
-    /bin/ls  
-    $  
-    $ cat test_ls_2 | ./hsh  
-    hsh main.c shell.c test_ls_2  
-    hsh main.c shell.c test_ls_2  
-    $
+    $ exit
+    user$ 
 
+#### Non-Interactive Mode
 
-**TASKS**  
-1.  Write a beautiful code that passes the Betty checks
-2.  Write a UNIX command line interpreter.    
-           Usage: simple_shell    
-Your Shell should:  
-     * Display a prompt and wait for the user to type a command. A command line always ends with a new line.
-     * The prompt is displayed again each time a command has been executed.
-     * The command lines are simple, no semicolons, no pipes, no redirections or any other advanced features.
-     * The command lines are made only of one word. No arguments will be passed to programs.
-     * If an executable cannot be found, print an error message and display the prompt again.
-     * Handle errors.
-     * You have to handle the “end of file” condition (Ctrl+D)  
-* You don’t have to:  
-     * use the PATH  
-     * implement built-ins  
-     * handle special characters : ", ', `, \, *, &, #  
-     * be able to move the cursor
-     * handle commands with arguments
+    user$ echo "ls" | ./hsh
+    a.out file0 file1 test.txt
+    user$ 
 
-execve will be the core part of your Shell, don’t forget to pass the environ to it…
+## Contents
 
-1. Simple shell 0.1+
-    *  Handle command lines with arguments
-2. Simple shell 0.2+
-    * Handle the PATH
-    *    fork must not be called if the command doesn’t exist
-3. Simple shell 0.3 +
-    * Implement the exit built-in, that exits the shell
-    * Usage: exit
-    * You don’t have to handle any argument to the built-in exit
-4. Simple shell 0.4 +
-    * Implement the env built-in, that prints the current environment
+| File | Function |Description|
+|--|--|--|
+|**shell.h**|| *contains libraries, function prototypes, externs, and struct declarations*
+|**shell.c**||
+||main|	*directs the shell through its fundamental loop of parsing and executing commands*
+||receive_sig|*prints prompt after user has interrupted loop with "ctrl + c" signal*
+|**_getline.c**|||
+||_getline|*reads input stream into buffer and parses into distinct command lines*
+||check_buffer|*checks if read buffer is empty*
+||copy_buffer|*copies from read buffer up to newline or null-byte*
+||shift_buffer|*shifts read buffer contents left n bytes*
+|**_strtok.c**||
+||_strtok| *separates tab or space-delimited "words" from the command line into an array of distinct tokens*
+||count_tokens| *counts the number of tokens in a command line*
+||token_length| *takes the length of a given token in a command line*
+|**executor.c**||
+||exec_mngr|*directs a tokenized command line to either built-in or external execution*
+||exec_builtin|*identify and execute a built-in command*
+||exec_external|*execute a command-specified external program*
+|**get_path.c**||
+||get_path|*retrieve path values from the "PATH" environment variable*
+||path_check|*determine if argument includes a path*
+||path_count|*count number of paths listed in "PATH" variable*
+||path_len|*take the length of a path*
+|**err_mngr.c**||
+||print_err|*format and print error message according to error number*
+||case_three|*format error message in case erring built-in function*
+|**builtin_exit.c**||
+||builtin_exit|*allows user to exit the shell with or without arguments*
+||_atoi|*converts number string to an integer*
+||is_num|*determines if a string is a number*
+|**builtin_env.c**||
+||builtin_env|*prints the environment*
+|**builtin_cd.c**||
+||builtin_cd|*parse arguments to determine and call appropriate cd behavior*
+||cd_HOME|*change current directory to home directory*
+||cd_current|*change current directory to current directory*
+||cd_prev|*change current directory to previous directory*
+||cd_parent|*change current directory to parent directory*
+|**cd_help.c**||
+||cd_arg|*change current directory to path provided as argument*
+||cd_user|*change current directory to user home directory*
+||get_target| *copy path from an environment variable*
+||set_PWD|*set the "PWD" environment variable*
+||set_OLDPWD| *set the "OLDPWD" environment variable*
+|**mem_help.c**||
+||alloc_mngr|*direct dynamic memory allocations and store a pointer to each in linked list for eventual freeing*
+||add_mem_node|*add node with pointer to new memory allocation to linked list
+||free_mem_list|*free linked list of memory allocations*
+||_realloc|*dynamically reallocate memory*
+||_memset|*initialize n bytes of memory to designated value*
+|**mem_help_2.c**||
+||free_static_mem_list|*free linked list of memory allocations*
+|**str_help.c**||
+||_strlen|*take the length of a string*
+||_strncpy|*copy n bytes from one string to another*
+||_strcmp|*compare two strings*
+||_strncmp|*compare n bytes of two strings*
+||_strcat|*concatenate one string to another*
+|**str_help_2.c**||
+||_revstr|*reverse a string*
+|**num_help.c**||
+||_itoa|*convert integer to string number*
+||count_digit|*count digits in number string*
